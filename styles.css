@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: #35424a;
+    color: #ffffff;
+}
+
+.search-section {
+    text-align: center;
+    margin: 50px 0;
+}
+
+#imageUpload {
+    margin: 10px 0;
+}
+

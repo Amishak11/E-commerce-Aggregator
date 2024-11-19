@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #cac653;
+            color: white;
+        }
+
+        .result-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .result-section img {
+            max-width: 250px; /* Reduced size */
+            height: auto;
+            margin: 20px;
+            border-radius: 10px;
+            border: 2px solid #cac653; /* Border to match the header */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effect */
+        }
+
+        .result-section img:hover {
+            transform: scale(1.05); /* Slightly enlarge the image on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Darker shadow on hover */
+        }
+
+        .product-gallery {
+            display: grid; /* Use grid for better alignment */
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller grid items */
+            gap: 15px; /* Reduced gap */
+            justify-items: center; /* Center items in their grid cells */
+            padding: 20px; /* Add padding around the gallery */
+        }
+
+        .product-gallery div {
+            width: 100%; /* Make sure it takes full width */
+            border: 1px solid #ccc;
+            border-radius: 10px; /* Rounded corners */
+            padding: 5px; /* Reduced padding */
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add subtle shadow for depth */
+            transition: transform 0.2s; /* Smooth effect on hover */
+        }
+
+        .product-gallery div:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+        }
+
+        .product-gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s, opacity 0.3s; /* Smooth hover effect */
+        }
+
+        #backBtn {
+            padding: 8px 15px; /* Reduced padding */
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px; /* Add margin to separate from product gallery */
+            transition: background-color 0.3s; /* Smooth background transition */
+        }
+
+        #backBtn:hover {
+            background-color: #007BFF; /* Change background color on hover */
+        }
+
+        .shop-now-btn {
+            padding: 8px 15px;
+            background-color: #28a745; /* Green background */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Margin above the button */
+            transition: background-color 0.3s; /* Smooth background transition */
+            display: block; /* Block display to fill width */
+            margin-left: auto; /* Center the button */
+            margin-right: auto; /* Center the button */
+            text-align: center; /* Center text */
+        }
+
+        .shop-now-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #464a35;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Search Results</h1>
+    </header>
+
+    <section class="result-section">
+        <h2>Your Uploaded Image</h2>
+        <img id="uploadedImage" alt="Uploaded Product">
+        
+        <h2>Similar Products</h2>
+        <div id="productGallery" class="product-gallery">
+            <!-- Similar products will be displayed here based on category -->
+        </div>
+
+        <button id="backBtn">Go Back</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 E-commerce Aggregator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Get the uploaded image and category from localStorage
+        const uploadedImage = localStorage.getItem('uploadedImage');
+        const selectedCategory = localStorage.getItem('selectedCategory');
+
+        // Display the uploaded image
+        if (uploadedImage) {
+            document.getElementById('uploadedImage').src = uploadedImage;
+        }
+
+        // Similar product data based on category
+        const productGallery = document.getElementById('productGallery');
+        const products = {
+            'electronics': [
+                { img: 'https://cdn.mos.cms.futurecdn.net/Ajc3ezCTN4FGz2vF4LpQn9.jpg', price: '₹50,000', platform: 'Flipkart', quantity: 15 },
+                { img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJ_epcmOow3-VBGBnAP-DkjwiWWcq_XfyjRH7rp9ljpg8bPKQPZ2nXdr5x6P3Bn1IUuKU&usqp=CAU', price: '₹1,50,000', platform: 'Amazon', quantity: 5 },
+                { img: 'https://www.livemint.com/lm-img/img/2024/05/02/600x338/75_inch_smart_tv_1714649551876_1714649561405.jpg', price: '₹2,799', platform: 'Meesho', quantity: 8 }
+            ],
+            'clothing': [
+                { img: 'https://www.ethnicplus.in/media/catalog/product/cache/1d5df636cf8c8988ea2d2c570bb7c21d/1/_/1_lw-9147_pink-4.jpg', price: '₹1,999', platform: 'Flipkart', quantity: 50 },
+                { img: 'https://static.wixstatic.com/media/232e4c_958d4761b2304c958193d04df8545da9~mv2.jpg/v1/fill/w_564,h_844,al_c,q_85,enc_auto/232e4c_958d4761b2304c958193d04df8545da9~mv2.jpg', price: '₹1,299', platform: 'Amazon', quantity: 30 },
+                { img: 'https://5.imimg.com/data5/ANDROID/Default/2021/7/KF/IU/YE/133215410/product-jpeg.jpg', price: '₹699', platform: 'Meesho', quantity: 12 }
+            ],
+            'home_appliances': [
+                { img: 'https://images-eu.ssl-images-amazon.com/images/G/31/img20/Smallappliances/Water-purifiers_1.jpg', price: '₹4,499', platform: 'Flipkart', quantity: 20 },
+                { img: 'https://images-eu.ssl-images-amazon.com/images/G/31/img20/Smallappliances/Induction-cooktops.jpg', price: '₹3,999', platform: 'Amazon', quantity: 10 },
+                { img: 'https://images-na.ssl-images-amazon.com/images/G/01/img18/home/Harmony/Nav_Tiles/SmallAppliances/Nav4._CB476888939_.jpg', price: '₹4,199', platform: 'Meesho', quantity: 7 }
+            ]
+        };
+
+        // Display similar products based on the selected category
+        if (selectedCategory && products[selectedCategory]) {
+            const productItems = products[selectedCategory].map(product => `
+                <div>
+                    <img src="${product.img}" alt="Similar Product">
+                    <p>Price: ${product.price}</p>
+                    <p>Available on: ${product.platform}</p>
+                    <p>Quantity Available: ${product.quantity}</p>
+                    <button class="shop-now-btn">Shop Now</button> <!-- Added Shop Now button -->
+                </div>
+            `).join('');
+            productGallery.innerHTML = productItems;
+        }
+
+        // Go back to the index page
+        const backBtn = document.getElementById('backBtn');
+        backBtn.addEventListener('click', () => {
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

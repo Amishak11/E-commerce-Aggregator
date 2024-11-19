@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Aggregator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #b7b875 0%, #806608 100%);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-container {
+            position: relative;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        /* Search section with enhanced styles */
+        .search-section {
+            text-align: center;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .search-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .search-section h2 {
+            margin-bottom: 20px;
+            color: #35424a;
+            font-size: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        #imageUpload, #categorySelect {
+            margin: 10px 0;
+            padding: 12px;
+            border: 2px solid #35424a;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            outline: none;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        #imageUpload:focus, #categorySelect:focus {
+            border-color: #007BFF;
+            background-color: #e8f0fe; /* Light blue background on focus */
+        }
+
+        #searchBtn {
+            padding: 12px 30px;
+            background-color: #35424a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #searchBtn:hover {
+            background-color: #007BFF;
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: #35424a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* New category images section */
+        .category-images {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px auto;
+            flex-wrap: wrap;
+            max-width: 800px;
+        }
+
+        .category-images div {
+            text-align: center;
+            width: 200px;
+        }
+
+        .category-images img {
+            width: 100%;
+            height: 200px; /* Increased height */
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .category-images img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Platform Gallery Styles */
+        .platform-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px auto;
+            flex-wrap: wrap;
+        }
+
+        .platform-gallery img {
+            height: 80px; /* Increased logo height */
+            transition: transform 0.3s;
+        }
+
+        .platform-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        @media screen and (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            #imageUpload, #categorySelect, #searchBtn {
+                width: 100%;
+                max-width: none;
+            }
+
+            .category-images img {
+                height: 150px; /* Adjusted height for mobile */
+            }
+
+            .platform-gallery img {
+                height: 60px; /* Adjust logo height for mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <h1>E-commerce Aggregator</h1>
+            <p>Search across Flipkart, Amazon, Meesho, and Myntra!</p>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div style="text-align: center; margin: 20px 0;">
+        <img src="https://www.shutterstock.com/image-vector/online-shopping-on-phone-buy-260nw-2078330851.jpg" 
+             alt="E-commerce Banner" 
+             style="width: 50%; height: auto; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+    </div>
+
+    <!-- Enhanced Search Section -->
+    <section class="search-section">
+        <h2>Upload Image to Search</h2>
+        <input type="file" id="imageUpload" accept="image/*" aria-label="Upload an image">
+        <select id="categorySelect" aria-label="Select a category">
+            <option value="clothing">Clothing</option>
+            <option value="electronics">Electronics</option>
+            <option value="home_appliances">Home Appliances</option>
+        </select>
+        <button id="searchBtn" aria-label="Search for products">Search</button>
+    </section>
+
+    <!-- Category Images Section -->
+    <section class="category-images">
+        <div>
+            <img src="https://img.freepik.com/free-photo/shop-clothing-clothes-shop-hanger-modern-shop-boutique_1150-8886.jpg" alt="Clothing">
+            <p>Clothing</p>
+        </div>
+        <div>
+            <img src="https://media.istockphoto.com/id/525969104/photo/e-commerce-or-online-shopping-concept-home-appliance-in-shoppin.jpg?s=612x612&w=0&k=20&c=7q2OG1WvB_Eom_V9NlL2Uof_oZIiHvgqSRbmwASOmjo=" alt="Electronics">
+            <p>Electronics</p>
+        </div>
+        <div>
+            <img src="https://en.pimg.jp/064/651/273/1/64651273.jpg" alt="Home Appliances">
+            <p>Home Appliances</p>
+        </div>
+    </section>
+
+    <!-- Platform Gallery -->
+    <section class="platform-gallery">
+        <a href="https://www.flipkart.com" target="_blank">
+            <img src="https://1000logos.net/wp-content/uploads/2021/02/Flipkart-logo.png" alt="Flipkart">
+        </a>
+        <a href="https://www.amazon.in" target="_blank">
+            <img src="https://pngimg.com/d/amazon_PNG13.png" alt="Amazon">
+        </a>
+        <a href="https://www.meesho.com" target="_blank">
+            <img src="https://startuparticle.com/wp-content/uploads/2024/03/1200x630wa.png" alt="Meesho">
+        </a>
+        <a href="https://www.myntra.com" target="_blank">
+            <img src="https://i.pinimg.com/736x/6e/0c/ce/6e0cce3bf57f63bf582921286edd1dc7.jpg" alt="Myntra">
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 E-commerce Aggregator. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const searchBtn = document.getElementById('searchBtn');
+        const imageUpload = document.getElementById('imageUpload');
+        const categorySelect = document.getElementById('categorySelect');
+
+        searchBtn.addEventListener('click', () => {
+            const file = imageUpload.files[0];
+            const selectedCategory = categorySelect.value;
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    // Save the uploaded image and selected category to localStorage
+                    localStorage.setItem('uploadedImage', e.target.result);
+                    localStorage.setItem('selectedCategory', selectedCategory);
+                    alert('Image uploaded successfully!');
+
+                    // Redirect to results page
+                    window.location.href = 'results.html'; // Change 'results.html' to your actual results page
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please upload an image.');
+            }
+        });
+    </script>
+</body>
+</html>
